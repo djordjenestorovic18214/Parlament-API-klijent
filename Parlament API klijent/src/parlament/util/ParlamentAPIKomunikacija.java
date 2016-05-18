@@ -22,10 +22,9 @@ public class ParlamentAPIKomunikacija {
 	private static final String parlamentURL = "http://147.91.128.71:9090/parlament/api/members";
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		
-	public LinkedList<Poslanik> vratiPoslanike() throws ParseException {
-		String result;
+	public static LinkedList<Poslanik> vratiPoslanike() throws ParseException {
 		try {
-			result = sendGet(parlamentURL);
+			String result = sendGet(parlamentURL);
 		
 		Gson gson = new GsonBuilder().create();
 		JsonArray poslaniciJson = gson.fromJson(result, JsonArray.class);
@@ -53,8 +52,22 @@ public class ParlamentAPIKomunikacija {
 		}
 		return new LinkedList<Poslanik>();	
 	}
+	
+	public static JsonArray serijalizujPoslanike(LinkedList<Poslanik> poslanici) {
+		JsonArray poslaniciJson = new JsonArray();
+		
+		for (int i = 0; i < poslanici.size(); i++) {
+			JsonObject poslanik = new JsonObject();
+			poslanik.addProperty("id", poslanici.get(i).getId());
+			poslanik.addProperty("ime", poslanici.get(i).getIme());
+			poslanik.addProperty("prezime", poslanici.get(i).getPrezime());
 
-	private String sendGet(String url) throws IOException {
+			poslaniciJson.add(poslanik);
+		}
+		return poslaniciJson;
+	}
+
+	private static String sendGet(String url) throws IOException {
 		URL obj = new URL(url);
 		HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
 		

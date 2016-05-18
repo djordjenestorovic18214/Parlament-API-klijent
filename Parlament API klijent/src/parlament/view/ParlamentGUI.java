@@ -20,6 +20,8 @@ import java.awt.Color;
 import javax.swing.JTextArea;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ParlamentGUI extends JFrame {
 
@@ -38,6 +40,7 @@ public class ParlamentGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public ParlamentGUI() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -46,7 +49,7 @@ public class ParlamentGUI extends JFrame {
 		});
 		setTitle("ParlamentMembers");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 647, 445);
+		setBounds(100, 100, 696, 470);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -93,6 +96,11 @@ public class ParlamentGUI extends JFrame {
 	private JButton getBtnGetMembers() {
 		if (btnGetMembers == null) {
 			btnGetMembers = new JButton("GET members");
+			btnGetMembers.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIKontroler.getMembers();
+				}
+			});
 		}
 		return btnGetMembers;
 	}
