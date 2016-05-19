@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "id": 12411,
+    "ime": "Dragan",
+    "prezime": "Aćimović"
+  },
+  {
+    "id": 189778,
+    "ime": "Nevena",
+    "prezime": "Adžemović",
+    "datumRodjenja": "01.01.1982."
+  },
+  {
+    "id": 226686,
+    "ime": "Slobodan",
+    "prezime": "Adžić",
+    "datumRodjenja": "01.01.1959."
+  },
+  {
+    "id": 75049,
+    "ime": "Borjan",
+    "prezime": "Agatonović"
+  },
+  {
+    "id": 18597,
+    "ime": "Danka",
+    "prezime": "Aksentijević"
+  },
+  {
+    "id": 414789,
+    "ime": "Siniša",
+    "prezime": "Aksentijević ",
+    "datumRodjenja": "01.01.1939."
+  },
+  {
+    "id": 6825,
+    "ime": "Miloljub",
+    "prezime": "Albijanić",
+    "datumRodjenja": "01.01.1967."
+  },
+  {
+    "id": 220203,
+    "ime": "Bojana",
+    "prezime": "Aleksić",
+    "datumRodjenja": "01.01.1961."
+  },
+  {
+    "id": 1479,
+    "ime": "Boris",
+    "prezime": "Aleksić"
+  },
+  {
+    "id": 414818,
+    "ime": "Gradimir",
+    "prezime": "Aleksić",
+    "datumRodjenja": "01.01.1945."
+  }
+]

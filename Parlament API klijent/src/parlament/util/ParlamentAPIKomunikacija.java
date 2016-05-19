@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,9 +19,9 @@ import parlament.domain.Poslanik;
 public class ParlamentAPIKomunikacija {
 	
 	private static final String parlamentURL = "http://147.91.128.71:9090/parlament/api/members";
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");
 		
-	public static LinkedList<Poslanik> vratiPoslanike() throws ParseException {
+	public static LinkedList<Poslanik> vratiPoslanike(){
 		try {
 			String result = sendGet(parlamentURL);
 		
@@ -39,15 +38,14 @@ public class ParlamentAPIKomunikacija {
 			p.setIme(poslanikJson.get("name").getAsString());
 			p.setPrezime(poslanikJson.get("lastName").getAsString());
 			if(poslanikJson.get("birthDate") != null)
-			p.setDatumRodjenja(sdf.parse(poslanikJson.get("birthDate").getAsString()));
-			
+				p.setDatumRodjenja(sdf.parse(poslanikJson.get("birthDate").getAsString()));
 			poslanici.add(p);
 		}
 		return poslanici;
 		
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return new LinkedList<Poslanik>();	
@@ -61,7 +59,8 @@ public class ParlamentAPIKomunikacija {
 			poslanik.addProperty("id", poslanici.get(i).getId());
 			poslanik.addProperty("ime", poslanici.get(i).getIme());
 			poslanik.addProperty("prezime", poslanici.get(i).getPrezime());
-
+			if(poslanici.get(i).getDatumRodjenja() != null)
+				poslanik.addProperty("datumRodjenja", sdf.format(poslanici.get(i).getDatumRodjenja()));
 			poslaniciJson.add(poslanik);
 		}
 		return poslaniciJson;

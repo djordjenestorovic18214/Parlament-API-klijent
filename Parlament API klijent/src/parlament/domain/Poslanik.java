@@ -18,12 +18,16 @@ public class Poslanik {
 		return ime;
 	}
 	public void setIme(String ime) {
+		if(ime == null || ime == "")
+			throw new RuntimeException("Morate uneti ime.");
 		this.ime = ime;
 	}
 	public String getPrezime() {
 		return prezime;
 	}
 	public void setPrezime(String prezime) {
+		if(prezime == null || prezime == "")
+				throw new RuntimeException("Morate uneti prezime.");
 		this.prezime = prezime;
 	}
 	public Date getDatumRodjenja() {
@@ -35,7 +39,7 @@ public class Poslanik {
 	
 	@Override
 	public String toString() {
-		return "Poslanik [id=" + id + ", ime=" + ime + ", prezime=" + prezime + ", datumRodjenja=" + datumRodjenja
+		return "Poslanik [id: " + id + ", ime: " + ime + ", prezime: " + prezime + ", datumRodjenja: " + datumRodjenja
 				+ "]";
 	}
 
