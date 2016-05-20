@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,6 +22,7 @@ import com.google.gson.JsonObject;
 
 import parlament.domain.Poslanik;
 import parlament.util.ParlamentAPIKomunikacija;
+import parlament.view.models.PoslanikTabelModel;
 
 public class GUIKontroler {
 
@@ -95,6 +97,31 @@ public class GUIKontroler {
 	public static void fillTable() {
 		ubaciPoslanikeIzFajla();
 		glavniProzor.osveziTabelu();
+	}
+	
+	public static void sacuvajTabeluUListu(JTable table) {
+		PoslanikTabelModel model = (PoslanikTabelModel) table.getModel();
+		int rows = model.getRowCount();
+		poslanici = new LinkedList<Poslanik>();
+		for (int i = 0; i < rows; i++) {
+			poslanici.add(model.getRowValue(i));
+		}
+	}
+	
+	public static void updateTable(LinkedList<Poslanik> poslanici) {
+		try {
+			JsonArray poslaniciJson = ParlamentAPIKomunikacija.serijalizujPoslanike(poslanici);
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("data/updatedMembers.json")));
+			
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			String poslaniciString = gson.toJson(poslanici);
+			
+			out.write(poslaniciString);
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void ugasiAplikaciju() {

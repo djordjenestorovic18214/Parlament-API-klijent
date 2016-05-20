@@ -89,6 +89,7 @@ public class ParlamentGUI extends JFrame {
 	private JTable getTable() {
 		if (table == null) {
 			table = new JTable();
+			table.setCellSelectionEnabled(true);
 			table.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 			table.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			table.setModel(new PoslanikTabelModel(GUIKontroler.vratiListuPoslanika()));
@@ -122,6 +123,13 @@ public class ParlamentGUI extends JFrame {
 	private JButton getBtnUpdateMembers() {
 		if (btnUpdateMembers == null) {
 			btnUpdateMembers = new JButton("Update members");
+			btnUpdateMembers.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.sacuvajTabeluUListu(table);
+					GUIKontroler.updateTable(GUIKontroler.vratiListuPoslanika());
+					txtStatus.setText("Izmenjeni podaci o poslanicima su sacuvani.");
+				}
+			});
 		}
 		return btnUpdateMembers;
 	}

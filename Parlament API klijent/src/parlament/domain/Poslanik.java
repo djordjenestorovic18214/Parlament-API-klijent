@@ -1,5 +1,6 @@
 package parlament.domain;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class Poslanik {
@@ -17,17 +18,17 @@ public class Poslanik {
 	public String getIme() {
 		return ime;
 	}
-	public void setIme(String ime) {
-		if(ime == null || ime == "")
-			throw new RuntimeException("Morate uneti ime.");
+	public void setIme(String ime) throws IOException {
+		if(ime == null || ime.isEmpty())
+			throw new IOException("Morate uneti ime.");
 		this.ime = ime;
 	}
 	public String getPrezime() {
 		return prezime;
 	}
-	public void setPrezime(String prezime) {
-		if(prezime == null || prezime == "")
-				throw new RuntimeException("Morate uneti prezime.");
+	public void setPrezime(String prezime) throws IOException {
+		if(prezime == null || prezime.isEmpty())
+				throw new IOException("Morate uneti prezime.");
 		this.prezime = prezime;
 	}
 	public Date getDatumRodjenja() {
